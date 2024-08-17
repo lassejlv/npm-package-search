@@ -73,25 +73,25 @@ export default async function page({ params }: { params: { package: string } }) 
           <div className="flex gap-2 mt-2">
             {data.homepage && (
               <Button variant="outline">
-                <a href={data.homepage} target="_blank" rel="noreferrer">
+                <a href={data.homepage ?? '#'} target="_blank" rel="noreferrer">
                   <Home size={18} className="inline mr-2 items-center" />
                   Homepage
                 </a>
               </Button>
             )}
 
-            {data.repository.url && (
+            {data.repository && (
               <Button variant="outline">
-                <a href={data.repository.url.replace('git+', '')} target="_blank" rel="noreferrer">
+                <a href={data.repository.url.replace('git+', '') ?? '#'} target="_blank" rel="noreferrer">
                   <Github size={18} className="inline mr-2 items-center" />
                   Repository
                 </a>
               </Button>
             )}
 
-            {data.bugs.url && (
+            {data.bugs && (
               <Button variant="outline">
-                <a href={data.bugs.url} target="_blank" rel="noreferrer">
+                <a href={data.bugs.url ?? '#'} target="_blank" rel="noreferrer">
                   <Bug size={18} className="inline mr-2 items-center" />
                   Bugs
                 </a>
