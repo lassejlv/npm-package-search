@@ -2,7 +2,6 @@
 
 import { searchPackages } from '@/actions/npm';
 import Loader from '@/components/Loader';
-import Settings from '@/components/settings';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { NpmPackageObject } from '@/lib/types';
@@ -54,31 +53,43 @@ export default function Home() {
         </p>
       </div>
 
-      <form className="flex gap-3" onSubmit={submit} ref={formRef} noValidate>
-        <Input
-          type="text"
-          name="search-query"
-          className="w-full"
-          placeholder="react... vue... next... tailwindcss..."
-          onChange={(e) => {
-            if (formRef.current) {
-              clearTimeout(formRef.current.timeoutId);
-              formRef.current.timeoutId = setTimeout(() => {
-                if (formRef.current) formRef.current.dispatchEvent(new Event('submit', { bubbles: true }));
-              }, 300);
-            }
-          }}
-          required
-        />
-        <Button type="submit" disabled={loading}>
-          {loading ? (
-            <>
-              <Loader />
-            </>
-          ) : (
-            'search'
-          )}
-        </Button>
+      <form className="flex flex-col gap-3" onSubmit={submit} ref={formRef} noValidate>
+        <div className="flex gap-3">
+          <Input
+            type="text"
+            name="search-query"
+            className="w-full"
+            placeholder="react... vue... next... tailwindcss..."
+            onChange={(e) => {
+              if (formRef.current) {
+                clearTimeout(formRef.current.timeoutId);
+                formRef.current.timeoutId = setTimeout(() => {
+                  if (formRef.current) formRef.current.dispatchEvent(new Event('submit', { bubbles: true }));
+                }, 300);
+              }
+            }}
+            required
+          />
+          <Button type="submit" disabled={loading}>
+            {loading ? (
+              <>
+                <Loader />
+              </>
+            ) : (
+              'search'
+            )}
+          </Button>
+        </div>
+
+        <div>
+          <p className="text-gray-500">
+            View Saved packages{' '}
+            <Link href="/saved" rel="noopener noreferrer" className="text-blue-500 underline">
+              {' '}
+              here
+            </Link>
+          </p>
+        </div>
       </form>
 
       {packages.length > 0 && (

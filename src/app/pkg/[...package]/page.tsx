@@ -7,6 +7,7 @@ import { NpmSinglePackage } from '@/lib/types';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Bug, Github, Home } from 'lucide-react';
+import Save from '@/components/save';
 
 export const revalidate = 0;
 
@@ -62,8 +63,8 @@ export default async function page({ params }: { params: any }) {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink className="text-lg text-gray-300" href={`/pkg/${params.package}`}>
-                  {params.package.join('/')}
+                <BreadcrumbLink className="text-lg text-gray-300 flex items-center">
+                  {params.package.join('/')} <Save name={data.name} />
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
