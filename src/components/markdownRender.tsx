@@ -9,7 +9,7 @@ interface Props {
 
 export default function MarkdownRender({ markdown }: Props) {
   return (
-    <div className="prose">
+    <div className="proseMarkdown">
       <ReactMarkdown>{markdown}</ReactMarkdown>
     </div>
   );

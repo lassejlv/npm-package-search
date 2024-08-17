@@ -67,3 +67,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.proseMarkdown {
+  @apply m-5 pt-5 prose prose-h1:text-white prose-h2:text-gray-300 prose-p:text-gray-500 prose-a:text-blue-500 prose-strong:font-bold prose-strong:text-gray-400 prose-code:text-pink-500 prose-li:text-gray-300;
+}

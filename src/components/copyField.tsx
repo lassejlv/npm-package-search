@@ -27,8 +27,8 @@ export default function CopyField({ name }: Props) {
 
   return (
     <>
-      <Input type="text" readOnly value={`${packageManager} install ${name}`} />
-      <Button onClick={handleCopy}>
+      <Input type="text" className="w-full" readOnly value={`${packageManager} install ${name}`} />
+      <Button variant="secondary" onClick={handleCopy}>
         <Copy size={18} />
       </Button>
     </>

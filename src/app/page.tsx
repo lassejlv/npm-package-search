@@ -41,7 +41,18 @@ export default function Home() {
 
   return (
     <>
-      <h1 className="text-4xl font-semibold my-12">Search for npm packages</h1>
+      <div className="mb-5">
+        <h1 className="text-4xl font-semibold">Search for npm packages</h1>
+
+        <p className="text-gray-500 my-3">
+          This website is under development. The design is not final and the website is not fully functional. <br /> Please report any
+          issues on{' '}
+          <Link href="https://github.com/lassejlv/npm-package-search" rel="noopener noreferrer" className="text-blue-500 underline">
+            GitHub
+          </Link>
+          .
+        </p>
+      </div>
 
       <form className="flex gap-3" onSubmit={submit} ref={formRef} noValidate>
         <Input
@@ -77,7 +88,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-7">
             {packages.map((pkg) => {
               return (
-                <div key={pkg.package.name} className="bg-gray-100 p-5 rounded-md">
+                <div key={pkg.package.name} className="bg-gray-900 p-5 rounded-md">
                   <h2 className="text-xl font-semibold">{pkg.package.name}</h2>
                   <p className="text-gray-500">{pkg.package.description}</p>
                   <Link href={`/pkg/${pkg.package.name}`} rel="noopener noreferrer" className="text-blue-500 underline">

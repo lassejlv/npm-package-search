@@ -4,20 +4,24 @@ import CopyField from '@/components/copyField';
 import MarkdownRender from '@/components/markdownRender';
 import { NpmSinglePackage } from '@/lib/types';
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Bug, Github, Home } from 'lucide-react';
 
 export const revalidate = 0;
 
-export default async function page({ params }: { params: { package: string } }) {
+export default async function page({ params }: { params: any }) {
+  const { package: pkg } = params;
+
+  const url = `${pkg.join('/').replace('%40', '@')}`;
+  let isSubPackage = false;
+
+  if (pkg.length > 1) {
+    isSubPackage = true;
+  } else {
+    isSubPackage = false;
+  }
+
   let data: NpmSinglePackage | undefined;
 
   // const isCached = await redis.get(`pkg:${params.package}`);
@@ -38,16 +42,12 @@ export default async function page({ params }: { params: { package: string } }) 
 
   // if (!data) return <div>no data in cache</div>;
 
-  const pkgData = await getPackage(params.package);
+  const pkgData = await getPackage(`${isSubPackage ? url : params.package}`);
 
   if (pkgData.error) return <div>error: {pkgData.message}</div>;
   if (!pkgData.data) return <div>no data</div>;
 
   data = pkgData.data as NpmSinglePackage;
-
-  console.log('home', data.homepage);
-  console.log('repo', data.repository);
-  console.log('bugs', data.bugs);
 
   return (
     <div>
@@ -56,14 +56,14 @@ export default async function page({ params }: { params: { package: string } }) 
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink className="text-lg text-black" href="/">
+                <BreadcrumbLink className="text-lg text-white" href="/">
                   Package
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink className="text-lg text-black" href={`/pkg/${params.package}`}>
-                  {params.package}
+                <BreadcrumbLink className="text-lg text-gray-300" href={`/pkg/${params.package}`}>
+                  {params.package.join('/')}
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
