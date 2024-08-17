@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'sonner';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,6 +14,7 @@ const font = Poppins({ subsets: ['latin'], weight: '400' });
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <Script defer src="https://cloud.umami.is/script.js" data-website-id="345a838e-1d6b-4f4e-b131-b2102f2052e5" />
       <body className={`${font.className} container mx-auto py-12`}>
         <Toaster visibleToasts={1} richColors />
         {children}
