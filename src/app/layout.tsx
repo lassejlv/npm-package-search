@@ -14,7 +14,7 @@ const font = JetBrains_Mono({ subsets: ['latin'], weight: '400' });
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="dark">
-      <Script defer src="https://cloud.umami.is/script.js" data-website-id="345a838e-1d6b-4f4e-b131-b2102f2052e5" />
+      <Script defer data-domain="npm.lassejlv.dk" src="https://plausible-analytics-ce-production-009d.up.railway.app/js/script.js"></Script>
       <body className={`${font.className} container mx-auto py-12`}>
         <Toaster visibleToasts={1} richColors theme="dark" position="bottom-center" />
         {children}
